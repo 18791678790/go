@@ -11,6 +11,12 @@ export const featchPlaylists = (cat) =>
 export const banner = () => http.get('/homepage/block/page');
 //菜单数据
 export const title = () => http.get('/homepage/dragon/ball');
-//
-
-
+//推荐歌单数据
+export const songlist = () => http.get('/homepage/block/page');
+//新歌新碟\数字专辑
+export const newsong = () => http.get('./top/song');
+// 这是排行榜
+export const rap = () => http.get('/homepage/block/page');
+//这是热门话题
+export const hot = () => http.get('/top/playlist?cat=华语');
+//这是音乐日历
