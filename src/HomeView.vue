@@ -82,7 +82,7 @@
                         <span class="w-[10vw] h-[7vw] text-center leading-[7vw] text-red-500">1</span>
                         <div class="flex justify-between h-[15vw] flex-col">
                             <span class="w-[40vw] h-[7vw] leading-[7vw] text-white text-sm truncate">{{ item.resources[0].uiElement.mainTitle.title }}</span>
-                            <div class="w-[40vw] h-[7vw] leading-[7vw] text-xs text-slate-300">{{ item.resources[1].resourceExtInfo.artists[0].name }}</div>
+                            <div class="w-[40vw] h-[7vw] leading-[7vw] text-xs text-slate-300">{{ item.resources[1].resourceExtInfo?.artists[0].name }}</div>
                         </div>
                         <span class=" text-red-500">{{ item.resources[0].uiElement.labelText.text}}</span>
                     </div>
@@ -96,18 +96,20 @@
                 <span class=" w-[60vw] text-[5vw] inline-block text-white">热门话题<Icon icon="iconamoon:arrow-up-2-thin" color="#ccc" :rotate="1" class="text-2xl inline-block"/></span>
                 <span class=" text-4xl"><Icon icon="majesticons:more-menu-line" color="#ccc" :rotate="1" /></span>
             </div>
-            <div class="h-[40vw] rounded w-[100vw] ">
-                <div class="flex justify-between  flex-col h-[40vw]">
-                    <div class="h-[15vw] text-lg flex justify-between flex-col">
-                        <span>{{  }}</span>
-                        <span>{{ }}</span>
-                    </div>
-                    <div class="">
-                        <span>{{ }}</span>
-                        <span>
-                            <img src="" alt="">
-                        </span>
-                    </div>
+            <div class="h-[40vw] rounded pl-[3vw] pr-[3vw] mt-[5vw] overflow-hidden flex flex-row">
+                <div v-for="item in hots"  class="flex justify-between flex-row h-[40vw] bg-slate-400 mx-2 rounded-lg" :key="item.id">
+                    <div class=" pt-[3vw] pb-[3vw] pl-[3vw] pr-[3vw] h-[40vw] w-[70vw] flex justify-evenly flex-col">
+                        <div class="h-[15vw] text-lg flex justify-center flex-col text-left">
+                            <span class=" text-white text-base h-[8vw] truncate">{{ item.name }}</span>
+                            <span class=" text-sm text-slate-300 h-[7vw]">{{item.specialType +'万热度' }}</span>
+                        </div>
+                        <div class=" w-[100%] h-[25vw] leading-[25vw]  flex justify-between flex-row">
+                            <span class=" w-[50vw] h-[20vw] leading-[20vw] text-sm break-all white-space truncate" >{{ item.description }}</span>
+                            <span>
+                                <img :src="item.subscribers[0]?.avatarUrl" alt="" class="w-[20vw] h-[20vw] rounded-lg" />
+                            </span>
+                        </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -115,23 +117,27 @@
         <!-- 这是音乐日历 -->
         <div class="pl-[3vw] pr-[3vw] mt-[5vw] flex flex-col self-start justify-between">
             <div class="flex justify-between h-[10vw] items-center">
-                <span class=" w-[60vw] text-[5vw] inline-block text-white">音乐日历<Icon icon="iconamoon:arrow-up-2-thin" color="#ccc" :rotate="1" class="text-2xl inline-block"/></span>
+                <div class=" w-[60vw] text-[5vw] text-white">
+                    音乐日历
+                    <span class=" ml-[3vw] rounded-lg rgba(0,0,0,0) text-xs border-[1px]">
+                        更多
+                        <Icon icon="iconamoon:arrow-up-2-thin" color="#ccc" :rotate="1" class="text-2xl inline-block"/>
+                    </span>
+                    </div>
                 <span class=" text-4xl"><Icon icon="majesticons:more-menu-line" color="#ccc" :rotate="1" /></span>
             </div>
-            <div class=" flex  flex-col justify-between h-[90vw] pl-[6vw] pr-[6vw] pt-[6vw] pb-[6vw]  rounded-lg rgba(0,0,0,0) shadow-lg border-[1px] overflow-hidden">
-                <div class="flex justify-between h-[10vw] items-center">
-                    <span class=" w-[60vw] text-[5vw] inline-block text-white">云音乐说唱榜<Icon icon="iconamoon:arrow-up-2-thin" color="#ccc" :rotate="1" class="text-2xl inline-block"/></span>
-                    <span class=" text-xs text-slate-400">超3亿次播放</span>
-                </div>
+            <div class=" flex  flex-col justify-between h-[50vw] pl-[6vw] pr-[6vw] pt-[6vw] pb-[6vw]  rounded-lg rgba(0,0,0,0) shadow-lg border-[1px] overflow-hidden">
                 <div class=" w-[100%] h-[60vw] mx-[2vw] flex justify-between flex-col flex-wrap overflow-hidden">
-                    <div v-for="item in raper" class="flex flex-wrap flex-col justify-evenly w-[100%] h-[15vw] overflow-hidden mx-[1vw]"  :key="item.id">
-                        <img :src="item.resources[0].uiElement.image.imageUrl" class="w-[15vw] h-[15vw] rounded-md" alt="">
-                        <span class="w-[10vw] h-[7vw] text-center leading-[7vw] text-red-500">1</span>
+                    <div v-for="item in calendars" class="flex flex-wrap flex-col justify-evenly w-[100%] h-[15vw] overflow-hidden mx-[1vw]"  :key="item.id">
                         <div class="flex justify-between h-[15vw] flex-col">
                             <span class="w-[40vw] h-[7vw] leading-[7vw] text-white text-sm truncate">{{ item.resources[0].uiElement.mainTitle.title }}</span>
-                            <div class="w-[40vw] h-[7vw] leading-[7vw] text-xs text-slate-300">{{ item.resources[1].resourceExtInfo.artists[0].name }}</div>
+                            <div class="w-[40vw] h-[7vw] leading-[7vw] text-xs text-slate-300">{{ item.resources[1].resourceExtInfo?.artists[0].name }}</div>
                         </div>
-                        <span class=" text-red-500">{{ item.resources[0].uiElement.labelText.text}}</span>
+                        <div class="flex justify-center flex-col w-[10vw] ">
+                            <Icon icon="streamline:interface-alert-alarm-bell-2-alert-bell-ring-notification-alarm" color="white" class=" self-center" />
+                            <span class="flex-auto text-white text-xs self-center">1564</span>
+                        </div>
+                        <img :src="item.resources[0].uiElement.image.imageUrl" class="w-[15vw] h-[15vw] rounded-md" alt="">
                     </div>
                 </div>
             </div>
@@ -141,7 +147,7 @@
 </template>
 
 <script>
-import {banner,title,songlist,newsong,rap,hot} from '@/request/index';
+import {banner,title,songlist,newsong,rap,hot,calendar} from '@/request/index';
 import BScroll from '@better-scroll/core';
 import Swiper from "swiper";
 export default {
@@ -152,7 +158,8 @@ export default {
             songlists: [],
             newsongs: [],
             raper: [],
-            hots:[],
+            hots: [], 
+            calendars: [],
         };
     },
     mounted() {
@@ -168,6 +175,12 @@ export default {
                 click: true,
             });
         },
+        time() {
+            const today = new Date();
+            month = today.getMonth - 1;
+            day = today.getDay;
+            console.log(month/day)
+        }
     },
 //数据
     async created() {
@@ -192,8 +205,12 @@ export default {
         // console.log(this.raper);
 
         const res5 = await hot();
-        this.hots = res5;
-        console.log(res5);
+        this.hots = res5.data.playlists;
+        // console.log(this.hots);
+
+        const res6 = await calendar();
+        this.calendars = res6.data.data.blocks[5].creatives;
+        // console.log(this.calendars);
     },
 
     watch: {
